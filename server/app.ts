@@ -3,7 +3,7 @@ import { config } from 'dotenv';
 
 config();
 
-const { TOKEN, CLIENT_ID } = process.env;
+const { DISCORD_TOKEN, APP_ID } = process.env;
 
 const commands = [
   {
@@ -12,12 +12,12 @@ const commands = [
   },
 ];
 
-const rest = new REST({ version: '10' }).setToken(TOKEN || '');
+const rest = new REST({ version: '10' }).setToken(DISCORD_TOKEN || '');
 
 try {
   console.log('Started refreshing application (/) commands.');
 
-  await rest.put(Routes.applicationCommands(CLIENT_ID || ''), { body: commands });
+  await rest.put(Routes.applicationCommands(APP_ID || ''), { body: commands });
 
   console.log('Successfully reloaded application (/) commands.');
 } catch (error) {
